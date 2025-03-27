@@ -56,4 +56,9 @@ public class Task {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
+
+    public void displayTask() {
+        System.out.println("Title: " + title + " - Người phụ trách: "
+                + assignedTo.getName() + " - Hạn chót: " + dueDate);
+    }
 }

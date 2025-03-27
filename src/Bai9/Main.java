@@ -24,14 +24,15 @@ public class Main {
                 .filter(order -> order.getDeliveryDate().isEmpty())
                 .forEach(Order::toDisplayString);
 
-        LocalDate startDate = LocalDate.of(2025, 3, 20);
-        LocalDate endDate = LocalDate.of(2025, 3, 21);
+        LocalDate startDate = LocalDate.of(2025, 3, 17);
+        LocalDate endDate = LocalDate.of(2025, 3, 23);
 
         long deliveredCount = orders.stream()
                 .filter(order -> order.getDeliveryDate()
-                        .filter(date -> !date.isBefore(startDate) && !date.isAfter(endDate))
-                        .isPresent())
+                        .map(date -> date.isBefore(startDate) && date.isAfter(endDate))
+                        .orElse(true))
                 .count();
+
 
         System.out.println("Số đơn hàng đã giao từ ngày " + startDate + " đến " + endDate + " là: " + deliveredCount);
     }

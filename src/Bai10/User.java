@@ -10,7 +10,7 @@ public class User {
     public User(int id, String name, Optional<String> email) {
         this.id = id;
         this.name = name;
-        this.email = email;
+        this.email = Optional.ofNullable(String.valueOf(email));
     }
 
     public int getId() {

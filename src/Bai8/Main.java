@@ -32,12 +32,10 @@ public class Main {
 
         );
 
-        Map<String, Long> studentMap = students.stream().map(Student::getMajor).collect(Collectors.groupingBy(String::toString, Collectors.counting()));
+        Map<String, Long> majorCountStd = students.stream().map(Student::getMajor).collect(Collectors.groupingBy(String::toString, Collectors.counting()));
 
-        Map<String, Long> sortedStudent = studentMap.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey)).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        majorCountStd.entrySet().stream().sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                .forEach(entry -> System.out.println("Chuyên ngành: "+entry.getKey()+" - Số lượng: "+entry.getValue()));
 
-        for (Map.Entry<String, Long> entry : sortedStudent.entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue());
-        }
     }
 }
